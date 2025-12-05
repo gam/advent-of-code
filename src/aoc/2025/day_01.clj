@@ -11,13 +11,17 @@
        str/split-lines
        (map parse-line)))
 
-(def test-data (parse-input "data/day_1_test.txt"))
-(def real-data (parse-input "data/day_1_input.txt"))
+(def test-data (parse-input "resources/inputs/2025/d01-test.txt"))
+(def real-data (parse-input "resources/inputs/2025/d01.txt"))
+
+;; ---------------
 
 (defn solve-1 [[curr zeros] delta]
   (let [result (+ curr delta)
         dial (mod result 100)]
     [dial (if (zero? dial) (inc zeros) zeros)]))
+
+;; ---------------
 
 (defn solve-2 [[acc zeros] delta]
   (let [result (+ acc delta)
@@ -26,8 +30,12 @@
                        (and (pos? acc) (neg? result))) (inc rotations) rotations)]
     [(mod result 100) (+ nzeros zeros)]))
 
+;; ---------------
+
 (defn solver [method data]
   (second (reduce method [50 0] data)))
+
+;; ---------------
 
 (deftest aoc-2025.day1
   (testing solve-1
